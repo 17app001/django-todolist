@@ -10,16 +10,9 @@
 <body>
     <h1>Register</h1>
     <form action="" method="POST">
-        <label for="">username</label>
-        <input type="text"><br>
-        <label for="">password</label>
-        <input type="password"><br>
-        <label for="">confirm-password</label>
-        <input type="password"><br>
-
+        {% csrf_token %}
+        {{form.as_p}}
         <button type="submit">註冊</button>
-
-
     </form>
 </body>
 
