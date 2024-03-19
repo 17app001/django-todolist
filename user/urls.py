@@ -21,5 +21,6 @@ from . import views
 
 # 分配user次要路徑
 urlpatterns = [
-    path("register/", views.user_register),
+    path("login/", views.user_login, name="login"),
+    path("register/", views.user_register, name="register"),
 ]
