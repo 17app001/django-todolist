@@ -16,10 +16,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
+# 分配user次要路徑
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("user/", include("user.urls")),
-    path("", include("todo.urls")),
+    path("", views.todo, name="todo"),
 ]

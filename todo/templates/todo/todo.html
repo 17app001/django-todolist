@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}首頁{% endblock %}
+{% block style %}
+<style>
+  .todo-list {
+    padding: 16px;
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+    width: 80%;
+    height: 200px;
+    margin: 12px auto;
+  }
+
+  .created {
+    border-radius: 6px;
+    padding: 6px;
+    background-color: rgb(50, 0, 144);
+    color: white;
+  }
+
+  .text {
+    padding: 12px;
+    width: 80%;
+    margin: 0 auto;
+    height: 80px;
+    border-radius: 12px;
+    background-color: aqua;
+  }
+</style>
+
+{% endblock %}
+{% block content %}
+<h1>TodoList</h1>
+
+{% if is_authenticated %}
+{% for todo in todos %}
+
+<div class="todo-list">
+  <div class="created">{{todo.created}}</div>
+  <h2> {{todo.title}}</h2>
+  <div style="text-align: left;">
+    <p class="text">
+      {{todo.text}}
+      -{{todo.important}}-{{todo.date_completed}}</p>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<h3 id="message"><u>請先登入或創建帳號</u></h3>
+{% endif %}
+{% endblock %}
