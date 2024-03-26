@@ -5,11 +5,10 @@
 <style>
     .todo-list {
         background-color: rgb(255, 255, 255);
-        margin: 24px auto;
+        margin: 36px auto;
         width: 450px;
         height: 200px;
         border-radius: 12px;
-
     }
 
     .date {
@@ -39,7 +38,13 @@
 
 {% endblock %}
 {% block content %}
-<h1>TodoList</h1>
+<h1>
+    {% if completed %}
+    Completed-Todo
+    {% else %}
+    TodoList
+    {% endif %}
+</h1>
 {% for todo in todos %}
 <div class="todo-list">
     <p class="date">{{todo.created}}</p>
@@ -50,6 +55,7 @@
         {% endif %}
     </p>
     <p class="text">{{todo.text}}</p>
+    <a href="{% url 'delete-todo' todo.id %}" onclick="return confirmDelete()">刪除</a>
 </div>
 {% endfor %}
 

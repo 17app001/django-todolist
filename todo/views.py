@@ -2,8 +2,35 @@ from django.shortcuts import render, redirect
 from .models import Todo
 from .forms import TodoForm
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
+def delete_todo(request, id):
+    # all,get,filter
+    try:
+        todo = Todo.objects.get(id=id)
+        print(todo)
+        todo.delete()
+    except Exception as e:
+        print(e)
+
+    return redirect("todolist")
+
+
+@login_required
+def completed_todo(request):
+    todos = None
+    completed = True
+    if request.user.is_authenticated:
+        todos = Todo.objects.filter(user=request.user, completed=True).order_by(
+            "-created"
+        )
+
+    return render(request, "todo/todo.html", {"todos": todos, "completed": completed})
+
+
+@login_required
 def create_todo(request):
     # GET
     message = ""
@@ -35,6 +62,7 @@ def todolist(request):
     return render(request, "todo/todo.html", {"todos": todos})
 
 
+@login_required
 def view_todo(request, id):
     todo = None
     message = ""
@@ -48,7 +76,7 @@ def view_todo(request, id):
                 todo.date_completed = (
                     datetime.now() if request.POST.get("completed") else None
                 )
-
+                # 建立更新後的實例
                 form = TodoForm(request.POST, instance=todo)
                 if form.is_valid():
                     form.save()
@@ -56,7 +84,6 @@ def view_todo(request, id):
             elif request.POST.get("delete"):
                 todo.delete()
                 return redirect("todolist")
-
     except Exception as e:
         print(e)
         message = "修改或刪除失敗..."
