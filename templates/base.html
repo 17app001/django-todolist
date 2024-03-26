@@ -30,14 +30,19 @@
         }
 
         a {
-            margin-left: 12px;
+            margin-left: 6px;
         }
 
         .button-style {
-            background-color: beige;
+            background-color: orangered;
+            color: white;
             padding: 6px;
+            border-radius: 12px;
             text-decoration: none;
-            border-radius: 6px;
+        }
+
+        input {
+            text-align: center;
         }
     </style>
     {% block style %}
@@ -52,7 +57,7 @@
         <a href="{% url 'profile' %}">{{user.username}}</a>
         <a href="{% url 'logout' %}">登出</a>
         <a class="button-style" href="{% url 'todolist' %}">代辦列表</a>
-        <a class="button-style" href="{% url 'create_todo' %}">建立事項</a>
+        <a class="button-style" href="{% url 'create-todo' %}">建立事項</a>
         {% else %}
         <a href="{% url 'login' %}">登入</a>
         <a href="{% url 'register' %}">註冊帳號</a>
