@@ -6,6 +6,19 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
+def uncompleted_todo_byid(request, id):
+    try:
+        todo = Todo.objects.get(id=id)
+        todo.completed = False
+        todo.date_completed = None
+        todo.save()
+    except Exception as e:
+        print(e)
+
+    return redirect("completed-todo")
+
+
+@login_required
 def completed_todo_byid(request, id):
     try:
         todo = Todo.objects.get(id=id)
