@@ -92,7 +92,8 @@ DATABASES = {
         "NAME": "todolist",
         "USER": "root",
         "PASSWORD": "12345678",
-        "HOST": "127.0.0.1",
+        # "HOST": "127.0.0.1",
+        "HOST": "database-1.cpgik2am836t.ap-southeast-2.rds.amazonaws.com",
         "PORT": "3306",
     }
 }
